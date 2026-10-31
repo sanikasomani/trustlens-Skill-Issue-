@@ -78,5 +78,9 @@ The `trustlens-popup` folder is a Chrome extension. When you open an email in Gm
 - Reporting dashboard and one-tap links to the 1930 helpline and cybercrime.gov.in
 
 ## Team
+Team name: SKILL ISSUES
 
-*Add your team name and members here.*
+Sanika Somani
+Sharanya Sindgi
+Satyam Gusain
+Sharan Desai
