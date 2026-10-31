@@ -1,0 +1,86 @@
+TRUSTLENS - START HERE (very simple guide, Windows)
+=====================================================
+
+WHAT IS THIS PROJECT?
+Scammers send fake messages ("Your bank account will be blocked, click here!").
+TrustLens is a small program. You paste a message into it, and it tells you:
+  - is it dangerous? (green = safe, orange = suspicious, red = dangerous)
+  - WHY (it highlights the scary words and links)
+  - what to do next (example: call your bank using the number on your card)
+It never opens links and never sends anything. Everything stays on your computer.
+
+THE 5 FILES (they must stay together in ONE folder)
+  app.py            = the web page you see
+  detector.py       = the brain that checks messages
+  dataset.json      = fake practice messages
+  requirements.txt  = the list of tools needed
+  README.md         = the description for GitHub
+
+-----------------------------------------------------
+PART 1: INSTALL (only the first time)
+-----------------------------------------------------
+1. Install Python from python.org/downloads
+   IMPORTANT: on the first screen, tick the box "Add Python to PATH".
+2. Open the folder that has the 5 files.
+3. Click the long address bar at the top of the folder window.
+4. Type:  cmd    and press Enter.  A black window opens.
+5. Type this and press Enter (wait until it finishes, 1-5 minutes):
+       pip install -r requirements.txt
+
+-----------------------------------------------------
+PART 2: RUN THE APP (every time)
+-----------------------------------------------------
+1. Open the folder with the 5 files.
+2. Click the address bar, type:  cmd    press Enter.
+3. In the black window type:
+       streamlit run app.py
+4. Your browser opens the TrustLens page.
+   (If it asks for an email in the black window, just press Enter.)
+5. DO NOT close the black window while using the app.
+6. To stop the app: click the black window and press Ctrl + C.
+
+-----------------------------------------------------
+PART 3: USE THE APP
+-----------------------------------------------------
+1. Left side: pick a message under "Try a sample".
+2. Click the red "Analyze" button.
+3. Read the colored badge and the explanations.
+4. Try your own message: type it in the Message box.
+   Also fill the Sender box (a phone number like 9876543210, or
+   Name <email@site.com> for email). Then click Analyze.
+
+TEST THE BRAIN ONLY (optional): in the black window type
+       python detector.py
+You should see a list of 20 lines and "Accuracy: 20/20".
+
+-----------------------------------------------------
+MESSAGES THAT SHOW RED (HIGH RISK) - try these
+-----------------------------------------------------
+Channel: SMS    Sender: 9876543210
+Message: Aapka HDFC account 2 ghante me block ho jayega. KYC update karein: http://bit.ly/hdfc-kyc
+
+Channel: SMS    Sender: 9876543210
+Message: Your SBI account is blocked immediately. Click http://sbi-kyc-update.xyz to update your KYC and enter your OTP
+
+Channel: Email  Sender: Amazon Support <amazon-support@gmail.com>
+Message: Dear customer, verify your password within 2 hours or your account will be closed: http://amaz0n-verify.com/signin
+
+A HARMLESS MESSAGE (stays green): pick sample #11 in the sidebar.
+
+-----------------------------------------------------
+PROBLEMS?
+-----------------------------------------------------
+"python is not recognized"  -> reinstall Python, tick "Add Python to PATH".
+"pip is not recognized"     -> same fix as above.
+Page does not open          -> copy the address shown in the black window
+                               (like http://localhost:8501) into your browser.
+Red error text              -> copy it and send it to Claude.
+
+-----------------------------------------------------
+WHAT TO DO AFTER IT WORKS
+-----------------------------------------------------
+1. Try all 20 samples and some of your own messages.
+2. Add more fake messages (ask Claude to add them for you).
+3. Upload the 5 files to GitHub (github.com -> New repository -> upload files).
+4. Prepare a 3-minute pitch and practice the demo 3 times.
+5. Record your screen once (Windows key + G) as a backup video.
