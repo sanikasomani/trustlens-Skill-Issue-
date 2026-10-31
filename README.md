@@ -80,8 +80,12 @@ The `trustlens-popup` folder is a Chrome extension. When you open an email in Gm
 ## Team
 Team name: SKILL ISSUES
 
+
 Sanika Somani
+
 Sharanya Sindgi
+
 Satyam Gusain
+
 Sharan Desai
 
