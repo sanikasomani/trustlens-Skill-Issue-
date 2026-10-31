@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustLens demo inbox</title>
+<style>
+  :root{--ink:#14213d;--muted:#5b6678;--line:#d5dbe4;--bg:#eef2f6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif}
+  header{padding:18px 24px 6px}
+  h1{font:700 26px Georgia,serif;margin:0}
+  header p{margin:4px 0 0;color:var(--muted)}
+  .app{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:16px;padding:16px 24px 24px;align-items:start}
+  #list{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .item{display:block;width:100%;text-align:left;background:#fff;border:0;border-top:1px solid var(--line);padding:12px 14px;cursor:pointer;font:inherit;color:inherit}
+  .item:first-child{border-top:0}
+  .item:hover,.item.on{background:#eef2f6}
+  .item:focus-visible{outline:3px solid #ffe45e;outline-offset:-3px}
+  .tag{font-size:12px;font-weight:700;color:var(--muted);margin-right:6px}
+  .from{font-weight:700}
+  .snip{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #read{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 24px;min-height:260px}
+  #read .meta{color:var(--muted);font-size:14px;margin-bottom:12px}
+  #read pre{white-space:pre-wrap;word-break:break-word;font:inherit;margin:0}
+  .hint{color:var(--muted)}
+  @media(max-width:720px){.app{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Demo inbox</h1>
+  <p>All messages here are invented. Open one: TrustLens checks it the moment it opens and warns you if it looks risky.</p>
+</header>
+<div class="app">
+  <aside id="list" aria-label="Messages"></aside>
+  <main id="read"><p class="hint">Pick a message on the left.</p></main>
+</div>
+<script src="detector.js"></script>
+<script src="popup.js"></script>
+<script>
+const M = [
+  {ch:"SMS",from:"+91 98765 43210",subj:"",body:"Aapka HDFC account 2 ghante me block ho jayega. KYC update karein: http://bit.ly/hdfc-kyc"},
+  {ch:"SMS",from:"VM-HDFCBK",subj:"",body:"482913 is your OTP for txn of Rs 1,200 at AMAZON. Do not share it with anyone. -HDFC Bank"},
+  {ch:"Email",from:"Income Tax Dept <refund@verify-now.top>",subj:"Income Tax Refund Pending",body:"Dear taxpayer, you are eligible for a refund of Rs 24,560. Submit your net banking password and card number at https://incometax-refund.top/claim within 24 hours."},
+  {ch:"Email",from:"HDFC Bank <alerts@hdfcbank.com>",subj:"Your statement is ready",body:"Dear Priya Nair, your October statement is ready. View it by logging in to the official HDFC Bank app or NetBanking. We never ask for your password or OTP by email."},
+  {ch:"SMS",from:"9000000001",subj:"",body:"ನಿಮ್ಮ SBI ಖಾತೆ ತಕ್ಷಣ ಬ್ಲಾಕ್ ಆಗುತ್ತದೆ. KYC update ಮಾಡಲು ಈ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಿ: https://sbi-kyc-update.icu"},
+  {ch:"Email",from:"Amazon Support <amazon-support@gmail.com>",subj:"Unusual sign-in detected",body:"Dear customer, verify your password within 2 hours or your account will be closed: http://amaz0n-verify.com/signin"},
+  {ch:"SMS",from:"AX-AMZNIN",subj:"",body:"Your Amazon order #408-1234567 has been shipped and will arrive by Nov 2. Track: https://www.amazon.in/progress-tracker"},
+  {ch:"Email",from:"Priya from HR <priya@acme-corp.in>",subj:"Team meeting moved to 3 PM",body:"Hi team, the meeting is moved to 3 PM today in Room 4. Please be on time."}
+];
+const list = document.getElementById("list"), read = document.getElementById("read");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+M.forEach((m, i) => {
+  const b = document.createElement("button");
+  b.className = "item";
+  b.innerHTML = `<div><span class="tag">${m.ch}</span><span class="from">${esc(m.from)}</span></div><div class="snip">${esc(m.subj || m.body)}</div>`;
+  b.onclick = () => open(i, b);
+  list.appendChild(b);
+});
+function open(i, btn) {
+  const m = M[i];
+  list.querySelectorAll(".item").forEach(x => x.classList.remove("on"));
+  btn.classList.add("on");
+  read.innerHTML = `<div class="meta"><b>${esc(m.from)}</b> · ${m.ch}${m.subj ? " · " + esc(m.subj) : ""}</div><pre>${esc(m.body)}</pre>`;
+  TLPopup.show(TrustLens.analyze((m.subj ? m.subj + "\n" : "") + m.body, m.from));
+}
+</script>
+</body>
+</html>

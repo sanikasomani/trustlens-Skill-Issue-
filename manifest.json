@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "TrustLens",
+  "version": "1.0",
+  "description": "Warns you when an opened Gmail message looks like phishing. Runs fully on your computer.",
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["detector.js", "popup.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

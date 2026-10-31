@@ -1,0 +1,28 @@
+TRUSTLENS POPUP - HOW TO USE (Windows, Chrome)
+
+First: right-click trustlens-popup.zip > Extract All. Keep all files together in the folder.
+
+A) DEMO INBOX (no install, use this for your demo)
+1. Double-click inbox.html. It opens in your browser.
+2. Click any message. A TrustLens popup appears at the top right.
+3. Click "Close" (or press Esc) to dismiss it.
+
+B) GMAIL EXTENSION (warns on your real Gmail)
+1. Open Chrome and type  chrome://extensions  in the address bar. Press Enter.
+2. Turn ON "Developer mode" (switch at the top right).
+3. Click "Load unpacked" and choose the extracted trustlens-popup folder.
+4. Open (or refresh) mail.google.com.
+5. Open any email. If it looks risky, the popup appears. Safe emails show nothing.
+
+TO TEST IT SAFELY
+From another account, email yourself this invented text, then open it
+(check Spam if it is not in your inbox):
+  Subject: Account blocked
+  Your SBI account is blocked immediately. Click http://sbi-kyc-update.xyz to update your KYC and enter your OTP
+
+IF YOU CHANGE ANY FILE: go to chrome://extensions, click the refresh arrow on TrustLens, then refresh Gmail.
+
+PRIVACY: everything runs on your computer. Nothing is sent anywhere. The popup never clicks, replies, or deletes anything.
+
+LIMITS: Gmail changes its page layout now and then, so the extension may need a small fix later.
+SMS on a real phone needs a mobile app. The demo inbox shows the same warning for SMS.
